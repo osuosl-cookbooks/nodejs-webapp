@@ -42,6 +42,7 @@ nodejs_webapp 'test_a' do
   owner 'test_a'
   group 'test_a'
 
+  script 'run.js'
   repository 'https://github.com/osuosl/nodejs-test-apps.git'
   branch 'custom'
 
@@ -49,6 +50,7 @@ nodejs_webapp 'test_a' do
 end
 
 nodejs_webapp 'test_b' do
+  script 'run.js'
   repository 'https://github.com/osuosl/nodejs-test-apps.git'
   install_deps false
 end
