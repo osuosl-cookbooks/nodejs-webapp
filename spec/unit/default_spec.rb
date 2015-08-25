@@ -4,7 +4,7 @@ require 'spec_helper'
 describe 'nodejs-webapp-test::default' do
   let(:chef_run) do
     ChefSpec::SoloRunner.new(
-    step_into: ['nodejs_webapp']).converge(described_recipie)
+    step_into: ['nodejs-webapp']).converge(described_recipe)
   end
 
   it 'creates user and group for test_a' do
