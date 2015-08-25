@@ -26,13 +26,13 @@ describe 'nodejs-webapp-test::default' do
   end
 
   it 'installs dependencies for test_a with npm' do
-    expect(chef_run).to run_bash('npm install').with(
+    expect(chef_run).to run_bash('test_a: npm install').with(
       cwd: '/opt/custom/',
       user: 'test_a')
   end
 
   it 'should not install dependencies for test_b with npm' do
-    expect(chef_run).not_to run_bash('npm install').with(
+    expect(chef_run).not_to run_bash('test_b: npm install').with(
       cwd: '/opt/test_b',
       user: 'root')
   end

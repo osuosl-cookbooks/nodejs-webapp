@@ -34,12 +34,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-path = '/opt/custom'
-
 nodejs_webapp 'test_a' do
-  path path
+  path '/opt/custom'
   create_user true
-  owner 'test_a'
+  user 'test_a'
   group 'test_a'
 
   script 'run.js'
