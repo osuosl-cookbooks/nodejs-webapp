@@ -42,6 +42,7 @@ nodejs_webapp 'test_a' do
   owner 'test_a'
   group 'test_a'
 
+  name 'custom'
   script 'run.js'
   repository 'https://github.com/osuosl/nodejs-test-apps.git'
   branch 'custom'
