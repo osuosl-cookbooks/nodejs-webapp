@@ -32,16 +32,15 @@ describe 'nodejs-webapp-test::default' do
   end
 
   it 'should not install dependencies for test_b with npm' do
-    expect(chef_run).not_to run_bash('npm instll').with(
+    expect(chef_run).not_to run_bash('npm install').with(
       cwd: '/opt/test_b'
       user: 'root')
   end
 
   it 'should start or restart app script run.js with pm2' do
-    expect(chef_run).to start_or_restart_pm2_application('run.js').with(
-      name: 'test_a'
+    expect(chef_run).to pm2_application('test_a').with(
       script: 'run.js'
       user: 'test_a'
-      node_args: '--harmony --no-deprecation')
+      node_args: %w[--harmony --no-deprecation])
   end
 end
