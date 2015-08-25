@@ -1,56 +1,104 @@
-nodejs-webapp Cookbook
-======================
-TODO: Enter the cookbook description here.
+nodejs-webapp
+=============
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+A cookbook for easily deploying webapps like TimeSync and Etherpad-Lite.
 
-Requirements
-------------
-TODO: List your cookbook requirements. Be sure to include any
-requirements this cookbook has on platforms, libraries, other cookbooks,
-packages, operating systems, etc.
+Supported platforms
+-------------------
 
-e.g.
-#### packages
-- `toaster` - nodejs-webapp needs toaster to brown your bagel.
+Currently, nodejs-webapp is tested on the following:
 
-Attributes
-----------
-TODO: List your cookbook attributes here.
+* CentOS 6.6
+* CentOS 7.1
 
-e.g.
-#### nodejs-webapp::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['nodejs-webapp']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+However, there's a good chance it works on Debian-based operating systems as
+well.
 
 Usage
 -----
-#### nodejs-webapp::default
-TODO: Write usage instructions for each cookbook.
 
-e.g.
-Just include `nodejs-webapp` in your node's `run_list`:
+Apps can be deployed like so:
 
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[nodejs-webapp]"
-  ]
-}
+```
+nodejs_webapp 'my_node_app' do
+  script 'app.js'
+  repository 'https://github.com/osuosl/my_node_app.git'
+  node_args ['--harmony']
+end
+```
+
+Option            | Type      | Required? | Default value
+------------------|-----------|-----------|--------------
+`:repository`     | String    | ✓         | n/a
+`:branch`         | String    | ✓         | n/a
+`:script`         | String    | ✓         | n/a
+`:node_args`      | Array     |           | []
+`:path`           | String    |           | `/opt/:app_name`
+`:user`           | String    |           | `root`
+`:group`          | String    |           | `root`
+`:create_user`    | Boolean   |           | `false`
+
+* ``node_args``: arguments to pass to Node when running the app. For
+  ``--harmony``, set ``node_args: ['--harmony']``.
+* ``path``: where the app should live on the server. Defaults to the resource's
+  name inside of `/opt`.
+* ``user``, ``group``, and ``create_user``: the user and group to run Node as.
+  This user will also own the source code. If this user doesn't exist, it can
+  be automatically created by setting ``create_user`` to ``True``.
+
+Notes
+-----
+
+This app will be run with whatever version of Node is first in the system's
+``PATH``. If Node isn't installed, it will be installed; to control the version
+that's installed, see the [NodeJS cookbook documentation](https://github.com/redguide/nodejs).
+
+Running tests
+-------------
+
+To run all tests, including style checks with both foodcritic and rubocop, we
+use Rake. Rake allows for a granular level of testing, including running
+integration, style, and unit testing from one tool.
+
+To run all tests using a Vagrant virtual machine, run:
+
+```
+    $ rake
+```
+
+If you have access to an Openstack environment, you can set up your environment
+variables to allow you to run integration tests on Openstack. Setting that up is
+beyond the scope of this guide; if you're already set up, you can run style and
+unit tests locally and integration tests on Openstack with:
+
+```
+    $ rake cloud
+```
+
+
+### Running integration tests
+
+[Detailed instructions](https://github.com/osuosl-cookbooks/python-webapp/wiki/Development-Workflow#using-your-virtual-machine)
+
+All integration tests:
+
+```
+    $ rake integration:cloud
+    $ rake integration:vagrant
+```
+
+Individual integration test:
+
+```
+    $ kitchen converge [test suite]
+    $ kitchen verify [test suite]
+```
+
+### Running unit tests
+
+
+```
+    $ rake spec
 ```
 
 Contributing
