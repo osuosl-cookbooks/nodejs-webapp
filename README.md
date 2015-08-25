@@ -29,10 +29,11 @@ end
 
 Option            | Type      | Required? | Default value
 ------------------|-----------|-----------|--------------
-`:repository`     | String    | ✓         | n/a
-`:branch`         | String    | ✓         | n/a
-`:script`         | String    | ✓         | n/a
-`:node_args`      | Array     |           | []
+`:repository`     | String    | ✓         |
+`:branch`         | String    | ✓         |
+`:script`         | String    | ✓         |
+`:node_args`      | Array     |           | [ ]
+`:install_deps`   | Boolean   |           | `true`
 `:path`           | String    |           | `/opt/:app_name`
 `:user`           | String    |           | `root`
 `:group`          | String    |           | `root`
@@ -41,7 +42,8 @@ Option            | Type      | Required? | Default value
 * ``node_args``: arguments to pass to Node when running the app. For
   ``--harmony``, set ``node_args: ['--harmony']``.
 * ``path``: where the app should live on the server. Defaults to the resource's
-  name inside of `/opt`.
+  name inside of `/opt`. For example, the block above would live in
+  `/opt/my_node_app`.
 * ``user``, ``group``, and ``create_user``: the user and group to run Node as.
   This user will also own the source code. If this user doesn't exist, it can
   be automatically created by setting ``create_user`` to ``True``.
@@ -62,44 +64,15 @@ integration, style, and unit testing from one tool.
 
 To run all tests using a Vagrant virtual machine, run:
 
-```
     $ rake
-```
 
 If you have access to an Openstack environment, you can set up your environment
 variables to allow you to run integration tests on Openstack. Setting that up is
 beyond the scope of this guide; if you're already set up, you can run style and
 unit tests locally and integration tests on Openstack with:
 
-```
     $ rake cloud
-```
 
-
-### Running integration tests
-
-[Detailed instructions](https://github.com/osuosl-cookbooks/python-webapp/wiki/Development-Workflow#using-your-virtual-machine)
-
-All integration tests:
-
-```
-    $ rake integration:cloud
-    $ rake integration:vagrant
-```
-
-Individual integration test:
-
-```
-    $ kitchen converge [test suite]
-    $ kitchen verify [test suite]
-```
-
-### Running unit tests
-
-
-```
-    $ rake spec
-```
 
 Contributing
 ------------
