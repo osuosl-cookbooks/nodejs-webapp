@@ -44,8 +44,6 @@ action :install do
   directory path do
     action :create
     recursive true
-    owner new_resource.user
-    group new_resource.group
   end
 
   git path do
@@ -53,24 +51,24 @@ action :install do
     repository new_resource.repository
     revision new_resource.branch
     destination "#{path}/source"
-    user new_resource.user
-    group new_resource.group
   end
 
-  bash "#{new_resource.name}: npm install" do
-    user new_resource.user
-    cwd "#{path}/source"
-    code <<-EOH
-      npm install
-    EOH
-    only_if new_resource.install_deps
+  if new_resource.install_deps # ~FC023
+    bash "#{new_resource.name}: npm install" do
+      user 'root'
+      cwd "#{path}/source"
+      code <<-EOH
+        npm install
+      EOH
+    end
   end
 
   pm2_application new_resource.name do
+    user new_resource.user
     script new_resource.script
     cwd "#{path}/source"
     node_args new_resource.node_args
-    action [:deploy, :start_or_restart]
+    action [:deploy, :start_or_reload]
   end
 
   new_resource.updated_by_last_action(true)
