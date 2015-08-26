@@ -1,14 +1,11 @@
 require 'serverspec'
 set :backend, :exec
 
-describe group('custom') do
+describe group('test_a') do
   it { should exist }
 end
 
-describe user('custom') do
+describe user('test_a') do
   it { should exist }
-end
-
-describe user('custom') do
-  it { should belong_to_group 'custom' }
+  it { should belong_to_group 'test_a' }
 end
