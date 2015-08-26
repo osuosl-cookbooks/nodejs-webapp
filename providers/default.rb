@@ -46,6 +46,11 @@ action :install do
     recursive true
   end
 
+  # upgrade npm to latest version
+  bash 'upgrade npm' do
+    code 'npm -g install npm'
+  end
+
   git path do
     action :sync
     repository new_resource.repository

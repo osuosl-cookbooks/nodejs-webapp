@@ -40,6 +40,11 @@ describe 'nodejs-webapp-test::default' do
       cwd: '/opt/custom/source')
   end
 
+  it 'installs the latest version of npm' do
+    expect(chef_run).to run_bash('upgrade npm').with(
+      code: 'npm -g install npm')
+  end
+
   it 'should not install dependencies for test_b with npm' do
     expect(chef_run).not_to run_bash('test_b: npm install').with(
       cwd: '/opt/test_b')
