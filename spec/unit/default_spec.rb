@@ -7,6 +7,17 @@ describe 'nodejs-webapp-test::default' do
       step_into: ['nodejs-webapp']).converge(described_recipe)
   end
 
+  it 'installs nodejs webapp for test_a and test_b' do
+    expect(chef_run).to install_nodejs_webapp('test_a').with(
+      path: '/opt/custom',
+      repository: 'https://github.com/osuosl/nodejs-test-apps.git',
+      branch: 'custom'
+    )
+    expect(chef_run).to install_nodejs_webapp('test_b').with(
+      repository: 'https://github.com/osuosl/nodejs-test-apps.git'
+    )
+  end
+
   it 'creates user and group for test_a' do
     expect(chef_run).to create_group('test_a')
     expect(chef_run).to create_user('test_a')
