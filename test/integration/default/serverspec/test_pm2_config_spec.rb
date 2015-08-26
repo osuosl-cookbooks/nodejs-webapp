@@ -2,7 +2,8 @@ require 'serverspec'
 set :backend, :exec
 
 describe file('/etc/pm2/conf.d/test_a.json') do
-  its(:content) { should contain '["--harmony","--no-deprecation"]' }
+  its(:content) { should contain '--harmony' }
+  its(:content) { should contain '--no-deprecation' }
 end
 
 describe file('/etc/pm2/conf.d/test_a.json') do
