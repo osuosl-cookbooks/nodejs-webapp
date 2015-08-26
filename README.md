@@ -55,6 +55,11 @@ This app will be run with whatever version of Node is first in the system's
 ``PATH``. If Node isn't installed, it will be installed; to control the version
 that's installed, see the [NodeJS cookbook documentation](https://github.com/redguide/nodejs).
 
+**pm2 configuration**: If you specify a user account for your app, ``pm2`` will
+store the information about that application under that user account. To view
+information about the process, first ``su`` to the proper account before running
+``pm2 list``.
+
 Running tests
 -------------
 
