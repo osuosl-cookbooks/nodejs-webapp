@@ -30,9 +30,9 @@ end
 Option            | Type      | Required? | Default value
 ------------------|-----------|-----------|--------------
 `:repository`     | String    | ✓         |
-`:branch`         | String    | ✓         |
 `:script`         | String    | ✓         |
 `:node_args`      | Array     |           | [ ]
+`:branch`         | String    |           | `master`
 `:install_deps`   | Boolean   |           | `true`
 `:path`           | String    |           | `/opt/:app_name`
 `:user`           | String    |           | `root`
