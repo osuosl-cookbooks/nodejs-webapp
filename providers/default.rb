@@ -18,7 +18,6 @@
 #
 
 action :install do
-  # Use the git recipe to install git
   run_context.include_recipe 'git'
   run_context.include_recipe 'build-essential'
   run_context.include_recipe 'pm2'
@@ -31,19 +30,19 @@ action :install do
   # `/opt/name_attribute`
   path = new_resource.path || "/opt/#{new_resource.name}"
 
-  if new_resource.create_user
-    group new_resource.group do
-      action :create
-    end
-    user new_resource.user do
-      action :create
-      gid new_resource.group
-    end
+  group new_resource.group do
+    action :create
+  end
+  user new_resource.user do
+    action :create
+    gid new_resource.group
   end
 
   directory path do
     action :create
     recursive true
+    user new_resource.user
+    user new_resource.user
   end
 
   # upgrade npm to latest version

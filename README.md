@@ -37,16 +37,15 @@ Option            | Type      | Required? | Default value
 `:path`           | String    |           | `/opt/:app_name`
 `:user`           | String    |           | `root`
 `:group`          | String    |           | `root`
-`:create_user`    | Boolean   |           | `false`
 
 * ``node_args``: arguments to pass to Node when running the app. For
   ``--harmony``, set ``node_args: ['--harmony']``.
 * ``path``: where the app should live on the server. Defaults to the resource's
   name inside of `/opt`. For example, the block above would live in
   `/opt/my_node_app`.
-* ``user``, ``group``, and ``create_user``: the user and group to run Node as.
-  This user will also own the source code. If this user doesn't exist, it can
-  be automatically created by setting ``create_user`` to ``True``.
+* ``user``, ``group``: the user and group to run Node as. This user will also
+  own the source code. If this user doesn't exist, it will be automatically
+  created.
 
 Notes
 -----

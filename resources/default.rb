@@ -32,6 +32,3 @@ attribute :install_deps, 'kind_of' => [TrueClass, FalseClass], :default => true
 attribute :path, 'kind_of' => [String, NilClass], :default => nil
 attribute :user, 'kind_of' => String, :default => 'root'
 attribute :group, 'kind_of' => String, :default => 'root'
-
-# Creates the user if they do not already exist
-attribute :create_user, 'kind_of' => [TrueClass, FalseClass], :default => false

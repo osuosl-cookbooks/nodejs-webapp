@@ -36,7 +36,6 @@
 
 nodejs_webapp 'test_a' do
   path '/opt/custom'
-  create_user true
   user 'test_a'
   group 'test_a'
 
