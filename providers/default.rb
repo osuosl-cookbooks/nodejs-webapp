@@ -72,6 +72,7 @@ action :install do
     script new_resource.script
     cwd "#{path}/source"
     node_args new_resource.node_args
+    env new_resource.env
     action [:deploy, :start_or_reload]
   end
 

@@ -32,3 +32,5 @@ attribute :install_deps, 'kind_of' => [TrueClass, FalseClass], :default => true
 attribute :path, 'kind_of' => [String, NilClass], :default => nil
 attribute :user, 'kind_of' => String, :default => 'root'
 attribute :group, 'kind_of' => String, :default => 'root'
+
+attribute :env, 'kind_of' => [Hash, NilClass], :default => nil
