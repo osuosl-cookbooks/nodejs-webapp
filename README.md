@@ -47,6 +47,10 @@ Option            | Type      | Required? | Default value
   own the source code. If this user doesn't exist, it will be automatically
   created.
 
+**Important**: Due to how ``pm2`` works, it is only possible to have one
+instance of ``pm2`` start on server reboot. In order to ensure all Node
+applications survive reboots, run them all under a single user account.
+
 Notes
 -----
 

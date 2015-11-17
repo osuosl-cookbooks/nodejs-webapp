@@ -67,13 +67,37 @@ action :install do
     end
   end
 
+  pm2_home = "/home/#{new_resource.user}"
+
   pm2_application new_resource.name do
     user new_resource.user
     script new_resource.script
     cwd "#{path}/source"
+    home pm2_home
     node_args new_resource.node_args
     env new_resource.env
     action [:deploy, :start_or_reload]
+  end
+
+  # because pm2 can only write one startup script at a time, we're limited to
+  # running it under one user.
+  bash 'automatically start pm2' do
+    code <<-EOH
+      pm2 startup centos -u #{new_resource.user} --hp /home/#{new_resource.user}
+    EOH
+    env new_resource.env
+  end
+
+  env = new_resource.env.clone
+  env['HOME'] = pm2_home
+
+  # pm2 automatically searches its user's home directory for a dump on start.
+  # After reboot, it will automatically load apps stored here, so update that
+  # file with all of the currently running applications.
+  bash 'dump pm2 config' do
+    user new_resource.user
+    code 'pm2 save'
+    env env
   end
 
   new_resource.updated_by_last_action(true)
