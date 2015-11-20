@@ -20,17 +20,16 @@
 default_action :install
 
 # The information necessary to check out the code
-attribute :repository, 'kind_of' => String
-attribute :branch, 'kind_of' => String, :default => 'master'
-attribute :script, 'kind_of' => String
-
-attribute :node_args, 'kind_of' => [Array, NilClass], :default => nil
-attribute :install_deps, 'kind_of' => [TrueClass, FalseClass], :default => true
+attribute :repository, kind_of: String
+attribute :branch, kind_of: String, default: 'master'
+attribute :script, kind_of: String
+attribute :node_args, kind_of: [Array, NilClass], default: nil
+attribute :install_deps, kind_of: [TrueClass, FalseClass], default: true
 
 # Create the owner, path, or group if they do not exist
 # If path is nil it will default to '/opt/<name_attribute>'
-attribute :path, 'kind_of' => [String, NilClass], :default => nil
-attribute :user, 'kind_of' => String, :default => 'root'
-attribute :group, 'kind_of' => String, :default => 'root'
+attribute :path, kind_of: [String, NilClass], default: nil
+attribute :user, kind_of: String, default: 'root'
+attribute :group, kind_of: String, default: 'root'
 
-attribute :env, 'kind_of' => [Hash, NilClass], :default => nil
+attribute :env, kind_of: [Hash, NilClass], default: nil

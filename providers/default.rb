@@ -33,6 +33,7 @@ action :install do
   group new_resource.group do
     action :create
   end
+
   user new_resource.user do
     action :create
     gid new_resource.group
@@ -42,7 +43,7 @@ action :install do
     action :create
     recursive true
     user new_resource.user
-    user new_resource.user
+    group new_resource.group
   end
 
   # upgrade npm to latest version
@@ -88,16 +89,13 @@ action :install do
     env new_resource.env
   end
 
-  env = new_resource.env.clone
-  env['HOME'] = pm2_home
-
   # pm2 automatically searches its user's home directory for a dump on start.
   # After reboot, it will automatically load apps stored here, so update that
   # file with all of the currently running applications.
   bash 'dump pm2 config' do
     user new_resource.user
-    code 'pm2 save'
-    env env
+    code "HOME=#{pm2_home} pm2 save"
+    env new_resource.env
   end
 
   new_resource.updated_by_last_action(true)

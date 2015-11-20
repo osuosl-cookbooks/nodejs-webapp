@@ -1,7 +1,7 @@
 nodejs-webapp
 =============
 
-A cookbook for easily deploying webapps like TimeSync and Etherpad-Lite.
+A cookbook for easily deploying webapps written in NodeJS.
 
 Supported platforms
 -------------------
