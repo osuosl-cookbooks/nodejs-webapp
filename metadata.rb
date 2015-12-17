@@ -6,3 +6,8 @@ description      'Installs/Configures nodejs-webapp'
 long_description 'Installs/Configures nodejs-webapp'
 version          '0.1.0'
 
+depends 'build-essential'
+depends 'git'
+depends 'magic_shell'
+depends 'nodejs'
+depends 'pm2'

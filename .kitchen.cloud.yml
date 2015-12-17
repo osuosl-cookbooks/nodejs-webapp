@@ -28,4 +28,4 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[nodejs-webapp::default]
+      - recipe[nodejs-webapp-test::default]
