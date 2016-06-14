@@ -32,6 +32,8 @@ describe 'nodejs-webapp-test::default' do
     expect(chef_run).to sync_git('/opt/custom').with(
       repository: 'https://github.com/osuosl/nodejs-test-apps.git',
       branch: 'custom'
+      user: 'test_a',
+      group: 'test_a',
     )
     expect(chef_run).to sync_git('/opt/test_b').with(
       repository: 'https://github.com/osuosl/nodejs-test-apps.git'
