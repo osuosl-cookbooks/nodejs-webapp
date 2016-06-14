@@ -74,7 +74,8 @@ action :install do
   end
 
   # If we're working as root, we need to use /root instead of /home/root
-  pm2_home = new_resource.user == "root" ? "/root" : "/home/#{new_resource.user}"
+  pm2_home = "/home/#{new_resource.user}"
+  pm2_home = '/root' if new_resource.user == 'root'
 
   # evaluate the resource name at evaluation time to avoid context problem
   pm2_application new_resource.name do
