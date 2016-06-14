@@ -56,6 +56,8 @@ action :install do
     repository new_resource.repository
     revision new_resource.branch
     destination "#{path}/source"
+    user new_resource.user
+    group new_resource.group
   end
 
   if new_resource.install_deps # ~FC023
