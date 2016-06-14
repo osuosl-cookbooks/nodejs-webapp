@@ -17,6 +17,9 @@
 # limitations under the License.
 #
 
+# Separate resource into own context
+use_inline_resources
+
 action :install do
   run_context.include_recipe 'git'
   run_context.include_recipe 'build-essential'

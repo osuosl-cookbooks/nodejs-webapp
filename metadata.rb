@@ -5,6 +5,8 @@ license          'apache2'
 description      'Installs/Configures nodejs-webapp'
 long_description 'Installs/Configures nodejs-webapp'
 version          '1.0.0'
+issues_url       'https://github.com/osuosl-cookbooks/nodejs-webapp/issues'
+source_url       'https://github.com/osuosl-cookbooks/nodejs-webapp'
 
 depends 'build-essential'
 depends 'git'
