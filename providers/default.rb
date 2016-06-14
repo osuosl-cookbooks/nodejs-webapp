@@ -76,7 +76,7 @@ action :install do
   pm2_home = "/home/#{new_resource.user}"
 
   # evaluate the resource name at evaluation time to avoid context problem
-  pm2_application "#{new_resource.name}" do
+  pm2_application new_resource.name do
     user new_resource.user
     script new_resource.script
     cwd "#{path}/source"
