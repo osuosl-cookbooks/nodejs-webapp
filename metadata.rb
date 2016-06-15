@@ -13,3 +13,6 @@ depends 'git'
 depends 'magic_shell'
 depends 'nodejs'
 depends 'pm2'
+
+supports         'centos', '~> 6.0'
+supports         'centos', '~> 7.0'
