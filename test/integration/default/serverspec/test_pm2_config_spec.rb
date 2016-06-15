@@ -22,7 +22,7 @@ describe file('/etc/pm2/conf.d/test_b.json') do
   its(:content) { should contain '/opt/test_b/source' }
 end
 
-describe file('/etc/init.d/pm2-startup.sh') do
+describe file('/etc/init.d/pm2-init.sh') do
   it { should be_file }
 end
 
