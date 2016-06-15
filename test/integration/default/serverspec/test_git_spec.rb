@@ -37,7 +37,6 @@ end
 
 # Test that the right revision has been checked out
 describe command('cd /opt/test_b/source/ && '\
-  'git symbolic-ref HEAD') do
-  its(:stdout) { should match 'master' }
-  its(:stderr) { should match '' }
+  'diff <(git rev-parse HEAD) <(git rev-parse origin/master)') do
+  its(:stdout) { should match '' }
 end
