@@ -17,6 +17,9 @@
 # limitations under the License.
 #
 
+# Separate resource into own context
+use_inline_resources
+
 action :install do
   run_context.include_recipe 'git'
   run_context.include_recipe 'build-essential'
@@ -56,6 +59,8 @@ action :install do
     repository new_resource.repository
     revision new_resource.branch
     destination "#{path}/source"
+    user new_resource.user
+    group new_resource.group
   end
 
   if new_resource.install_deps # ~FC023
@@ -68,10 +73,12 @@ action :install do
     end
   end
 
+  # If we're working as root, we need to use /root instead of /home/root
   pm2_home = "/home/#{new_resource.user}"
+  pm2_home = '/root' if new_resource.user == 'root'
 
   # evaluate the resource name at evaluation time to avoid context problem
-  pm2_application "#{new_resource.name}" do
+  pm2_application new_resource.name do
     user new_resource.user
     script new_resource.script
     cwd "#{path}/source"

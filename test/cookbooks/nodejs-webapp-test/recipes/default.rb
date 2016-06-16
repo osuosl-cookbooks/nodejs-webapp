@@ -50,4 +50,5 @@ nodejs_webapp 'test_b' do
   script 'run.js'
   repository 'https://github.com/osuosl/nodejs-test-apps.git'
   install_deps false
+  branch 'master'
 end
