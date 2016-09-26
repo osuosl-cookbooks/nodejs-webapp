@@ -91,7 +91,7 @@ action :install do
     home pm2_home
     node_args new_resource.node_args
     env new_resource.env
-    action [:deploy, :start_or_reload]
+    action [:deploy, :start]
   end
 
   # because pm2 can only write one startup script at a time, we're limited to
