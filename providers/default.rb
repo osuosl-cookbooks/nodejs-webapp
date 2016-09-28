@@ -56,9 +56,8 @@ action :install do
 
   # hacky fix to prevent filling up /tmp due to bug with npm
   execute 'Clear temp files' do
-    command "find . -depth -iname 'npm-*' -type d -exec rm -r \"{}\" \\;"
+    command "find /tmp -depth -iname 'npm-*' -type d -exec rm -r \"{}\" \\;"
     action :run
-    cwd '/tmp'
   end
 
   git path do
