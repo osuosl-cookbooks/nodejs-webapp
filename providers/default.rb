@@ -54,6 +54,12 @@ action :install do
     code 'npm -g install npm'
   end
 
+  # hacky fix to prevent filling up /tmp due to bug with npm
+  execute 'Clear temp files' do
+    command "find /tmp -depth -iname 'npm-*' -type d -exec rm -r \"{}\" \\;"
+    action :run
+  end
+
   git path do
     action :sync
     repository new_resource.repository
