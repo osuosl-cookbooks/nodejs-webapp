@@ -1,0 +1,4 @@
+cookbook=nodejs-webapp
+version=1.0.1
+envs=~
+pr_link=https://github.com/osuosl-cookbooks/nodejs-webapp/pull/6
