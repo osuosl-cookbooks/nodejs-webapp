@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'berkshelf', '~> 4.3.0'
 gem 'chef', '= 12.10.24'
+gem 'berkshelf', '~> 4.3.3'
 gem 'test-kitchen'
 gem 'kitchen-openstack'
 gem 'kitchen-vagrant'
@@ -11,3 +11,4 @@ gem 'busser'
 gem 'chefspec'
 gem 'rspec'
 gem 'rake'
+gem 'chef', '= 12.10.24'
