@@ -44,6 +44,8 @@ nodejs_webapp 'test_a' do
   branch 'custom'
 
   node_args ['--harmony', '--no-deprecation']
+
+  action :install
 end
 
 nodejs_webapp 'test_b' do
@@ -51,4 +53,18 @@ nodejs_webapp 'test_b' do
   repository 'https://github.com/osuosl/nodejs-test-apps.git'
   install_deps false
   branch 'master'
+end
+
+nodejs_webapp 'test_run' do
+  path '/opt/test_run'
+  user 'test_run'
+  group 'test_run'
+
+  script 'run.js'
+  repository 'https://github.com/osuosl/nodejs-test-apps.git'
+  branch 'custom'
+
+  node_args ['--harmony', '--no-deprecation']
+
+  action :run
 end

@@ -4,3 +4,5 @@ AllCops:
     - '**/Cheffile'
   Exclude:
     - 'metadata.rb'
+Metrics/BlockLength:
+  Enabled: false

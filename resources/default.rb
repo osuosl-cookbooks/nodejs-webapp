@@ -17,6 +17,7 @@
 # limitations under the License.
 #
 
+actions :install, :run
 default_action :install
 
 # The information necessary to check out the code

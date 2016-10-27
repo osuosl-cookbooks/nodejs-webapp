@@ -57,12 +57,4 @@ describe 'nodejs-webapp-test::default' do
       cwd: '/opt/test_b'
     )
   end
-
-  it 'should start or restart app script run.js with pm2' do
-    expect(chef_run).to start_pm2_application('test_a').with(
-      script: 'run.js',
-      user: 'test_a',
-      node_args: %w(--harmony --no-deprecation)
-    )
-  end
 end
