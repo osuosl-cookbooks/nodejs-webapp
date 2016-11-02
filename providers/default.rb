@@ -91,7 +91,31 @@ action :install do
     home pm2_home
     node_args new_resource.node_args
     env new_resource.env
-    action [:deploy, :start]
+    action [:deploy]
+  end
+
+  new_resource.updated_by_last_action(true)
+end
+
+action :run do
+  run_context.include_recipe 'pm2'
+
+  # If the new_resource.path is nil set the install path to
+  # `/opt/name_attribute`
+  path = new_resource.path || "/opt/#{new_resource.name}"
+
+  # If we're working as root, we need to use /root instead of /home/root
+  pm2_home = "/home/#{new_resource.user}"
+  pm2_home = '/root' if new_resource.user == 'root'
+
+  pm2_application new_resource.name do
+    user new_resource.user
+    script new_resource.script
+    cwd "#{path}/source"
+    home pm2_home
+    node_args new_resource.node_args
+    env new_resource.env
+    action [:start]
   end
 
   # because pm2 can only write one startup script at a time, we're limited to

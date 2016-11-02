@@ -58,10 +58,15 @@ describe 'nodejs-webapp-test::default' do
     )
   end
 
-  it 'should start or restart app script run.js with pm2' do
-    expect(chef_run).to start_pm2_application('test_a').with(
+  it 'removes temporary files from npm' do
+    expect(chef_run).to run_execute('Clear temp files')
+  end
+
+  it 'installs test_a as a pm2 application' do
+    expect(chef_run).to deploy_pm2_application('test_a').with(
       script: 'run.js',
       user: 'test_a',
+      cwd: '/opt/custom/source',
       node_args: %w(--harmony --no-deprecation)
     )
   end
